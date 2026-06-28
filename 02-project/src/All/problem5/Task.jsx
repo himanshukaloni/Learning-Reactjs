@@ -5,13 +5,26 @@ const Task = () => {
           const [Title, setTitle] = useState('');
           const [Details, setDetails] = useState('');
           const [Task , setTask] = useState([]);
+          const obj = {user: 'himanshu', Rollno: 20};
+          const [Loading, setLoading] = useState(false);
 
-          function Submithandler(e) {
+          async function  Submithandler(e) {e.preventDefault();
+                    try{
+                    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+                    const data = await response.json();
+                    console.log(data);
+                    }catch(error){
+                              console.log(Loading);
+                    }
+
                     const copytask = [...Task];
                     copytask.push({Title,Details});
                     setTask(copytask);
                     console.log(copytask);
-                    e.preventDefault();
+                    localStorage.setItem('Title', Title );
+                    localStorage.setItem('Details' , JSON.stringify(obj));
+                    var hello = localStorage.getItem('Details');
+                    console.log(hello);
                     console.log("form submitted");
                     
                     setTitle('');
@@ -40,9 +53,9 @@ const Task = () => {
                                         <h1 className="text-black font-bold mb-3">Recent Notes</h1>
                                         <div className=" overflow-auto flex flex-wrap gap-2 max-w-90">
                                                   {
-                                                  Task.map((ele)=>{
+                                                  Task.map((ele, idx)=>{
                                                             return(
-                                                            <div className="bg-blue-500 flex flex-col min-w-20 max-w-40 max-h-40 min-h-20 p-3 rounded-2xl text-sm ">
+                                                            <div key={idx} className="bg-blue-500 flex flex-col min-w-20 max-w-40 max-h-40 min-h-20 p-3 rounded-2xl text-sm ">
                                                             <h2 className=" text-white font-bold text-center">{ele.Title}</h2>
                                                             <p className=" text-white overflow-auto">{ele.Details}</p>
 
