@@ -6,7 +6,7 @@ const Task = () => {
           const [Details, setDetails] = useState('');
           const [Task , setTask] = useState([]);
           const obj = {user: 'himanshu', Rollno: 20};
-          const [Loading, setLoading] = useState(false);
+          const [Loading, setLoading] = useState('');
 
           async function  Submithandler(e) {e.preventDefault();
                     try{
@@ -14,6 +14,7 @@ const Task = () => {
                     const data = await response.json();
                     console.log(data);
                     }catch(error){
+                              setLoading(error);
                               console.log(Loading);
                     }
 
