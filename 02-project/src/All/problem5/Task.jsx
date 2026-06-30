@@ -27,12 +27,12 @@ const Task = () => {
                     var hello = localStorage.getItem('Details');
                     console.log(hello);
                     console.log("form submitted");
-                    
                     setTitle('');
                     setDetails('');
 
           }
           return (
+                    <div>
                     <div className="flex bg-blue-100 rounded-2xl mb-10">
                               <form onSubmit={(e) => {
                                         Submithandler(e);
@@ -71,6 +71,8 @@ const Task = () => {
 
                               </div>
                     </div>
+                    </div>
           )
+
 }
 export default Task;
