@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Data = () => {
@@ -16,9 +16,12 @@ const Data = () => {
   }
 
   async function Getdata2() {
-    const result2 = await axios("https://jsonplaceholder.typicode.com/users");
+    const result2 = await axios.get("https://jsonplaceholder.typicode.com/users");
     setData2(result2.data);
   }
+  useEffect(function(){
+    console.log("useEffect is running...");
+  },[])// We use the array [] for giving dependency about when it will run like('[data] //it means when data chnages then the useEffect will run'). If we will not pass array dependency then it will run autonaticly after any changes or updation 
 
   return (
     <div>
@@ -55,13 +58,13 @@ const Data = () => {
 
 <div className="flex gap-5 justify-evenly py-5">
   <button
-        className="bg-gray-500 p-1 px-8 rounded-[10px] border-2"
+        className="bg-gray-500 active:bg-gray-100 p-1 px-8 rounded-[10px] border-2"
         onClick={Getdata}
       >
         FETCH
       </button>
       <button
-      className="bg-gray-500 p-1 px-8 rounded-[10px] border-2"
+      className="bg-gray-500 active:bg-gray-100 p-1 px-8 rounded-[10px] border-2"
       onClick={Getdata2}
       >
         AXIOS</button>
